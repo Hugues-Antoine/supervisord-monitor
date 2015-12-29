@@ -4,6 +4,9 @@
 // Dashboard columns. 2 or 3
 $config['supervisor_cols'] = 2;
 
+// Button enable
+$config['btn_enable'] = true;
+
 // Refresh Dashboard every x seconds. 0 to disable
 $config['refresh'] = 10;
 
