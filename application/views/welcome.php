@@ -43,16 +43,16 @@
         </div>
       </div>
     </div>
-	
+
 
 	<div class="container">
-	
+
 		<?php
 		if($muted){
 			echo '<div class="row"><div class="span4 offset4 label label-important" style="padding:10px;margin-bottom:20px;text-align:center;">';
 			echo 'Sound muted for '.timespan(time(),$muted).' <span class="pull-right"><a href="?mute=-1" style="color:white;"><i class="icon-music icon-white"></i> Unmute</a></span></div></div>';
 		}
-	
+
 		?>
 		<div class="row">
 				<?php
@@ -74,7 +74,7 @@
 						if(isset($cfg[$name]['username'])){echo '<i class="icon-lock icon-green" style="color:blue" title="Authenticated server connection"></i>';}
 						if(!isset($procs['error'])){
 						?>
-						<?php if($this->config->item('btn_enable')) { ?> 
+						<?php if($this->config->item('btn_enable')) { ?>
 							<span class="server-btns pull-right">
 								<a href="<?php echo site_url('/control/stopall/'.$name); ?>" class="btn btn-mini btn-inverse" type="button"><i class="icon-stop icon-white"></i> Stop all</a>
 								<a href="<?php echo site_url('/control/startall/'.$name); ?>" class="btn btn-mini btn-success" type="button"><i class="icon-play icon-white"></i> Start all</a>
@@ -89,12 +89,13 @@
 					$CI = &get_instance();
 					foreach($procs as $item){
 
-						if($item['group'] != $item['name']) $item_name = $item['group'].":".$item['name'];
-						else $item_name = $item['name'];
-						
+            $item_name = '';
+						if(isset($item['group']) && $item['group'] != $item['name']) $item_name = $item['group'].":".$item['name'];
+						elseif (isset($item['name'])) $item_name = $item['name'];
+
 						$check = $CI->_request($name,'readProcessStderrLog',array($item_name,-1000,0));
 						if(is_array($check)) $check = print_r($check,1);
-						
+
 						if(!is_array($item)){
 								// Not having array means that we have error.
 								echo '<tr><td colspan="4">'.$item.'</td></tr>';
@@ -152,7 +153,7 @@
 					}
 
 					?>
-				</table>				
+				</table>
 			</div>
 				<?php
 				}
@@ -164,13 +165,13 @@
 				}else{
 					echo '<title>Support center</title>';
 				}
-				
+
 				?>
 		</div>
 	</div>
 
     </div> <!-- /container -->
-	
+
 	<div class="footer">
 		<p>Powered by <a href="https://github.com/mlazarov/supervisord-monitor" target="_blank">Supervisord Monitor</a> | Page rendered in <strong>{elapsed_time}</strong> seconds</p>
 	</div>
@@ -216,7 +217,7 @@
 			stopTimer();
 			location.href="<?php echo site_url() ?>";
 		}
-		
+
 	}
 	function nl2br (str, is_xhtml) {
 		var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br ' + '/>' : '<br>';
