@@ -2,7 +2,7 @@ body{
 	cursor: default;
 }
 .popover {
-	max-width:	450px;
+  max-width: 90%;
 }
 .footer{ text-align:center;}
 
@@ -20,7 +20,7 @@ body{
 	}
 	.span4 {
 		width: 545px;
-	}	
+	}
 }
 @media (min-width: 980px){
 	body {
